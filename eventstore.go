@@ -315,9 +315,9 @@ func (s *EventStore) RenameEvent(ctx context.Context, from, to eh.EventType) err
 	return nil
 }
 
-func (s *EventStore) Close() error {
-	return s.db.Close()
-}
+// func (s *EventStore) Close() error {
+// 	return s.db.Close()
+// }
 
 // Clear clears the event storage.
 func (s *EventStore) Clear(ctx context.Context) error {
