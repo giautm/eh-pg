@@ -18,6 +18,8 @@ func TestEventStore(t *testing.T) {
 		User:     os.Getenv("POSTGRES_USER"),
 		Password: os.Getenv("POSTGRES_PASSWORD"),
 	})
+	defer db.Close()
+
 	store, err := ehpg.NewEventStore(db)
 	if err != nil {
 		t.Fatal("there should be no error:", err)
@@ -27,7 +29,6 @@ func TestEventStore(t *testing.T) {
 	}
 
 	ctx := eh.NewContextWithNamespace(context.Background(), "ns")
-	defer store.Close()
 	defer func() {
 		t.Log("clearing db")
 		if err = store.Clear(context.Background()); err != nil {
